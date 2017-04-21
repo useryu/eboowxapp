@@ -1,2 +1,15 @@
-<!--pages/audio/list.wxml-->
-<text>pages/audio/list.wxml</text>
+<import src="../../../common/head.wxml" />
+<import src="../../../common/foot.wxml" />
+
+<view class="container">
+  <template is="head" data="{{title: 'audio'}}"/>
+
+  <view class="page-body">
+    <view class="page-section page-section-gap"  bindtap="play" style="text-align: center;" wx:for="{{list}}" wx:key="id">
+      <audio style="text-align: left" src="{{item.src}}" poster="{{item.poster}}" 
+      name="{{item.name}}" author="{{item.author}}" action="{{audioAction}}" controls></audio>
+    </view>
+  </view>
+
+  <template is="foot" />
+</view>
