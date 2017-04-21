@@ -1,0 +1,21 @@
+<view class="root">
+    <view class="line">
+        <text>音频学习</text>
+        <view class="line-control">
+            <view bindtap="toAudioListPage" class="item" ><view class="item-inner">音频列表</view></view>
+        </view>
+    </view>
+    <view class="line">
+        <text>学习助手</text>
+        <input type="text" value="{{loginUrl}}" disabled class="hide"></input>
+        <view class="line-control">
+            <view bindtap="toAssistListPage" class="item"><view class="item-inner">助手列表</view></view>
+        </view>
+    </view>
+    <view class="line">
+        <text>单元测试</text>
+        <view class="line-control">
+            <view bindtap="toQuizListPage" class="item" ><view class="item-inner">测试列表</view></view>
+        </view>
+    </view>
+</view>

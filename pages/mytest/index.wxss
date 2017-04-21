@@ -1,0 +1,6 @@
+@import "../common/lib/weui.wxss";
+@import "../common/index.wxss";
+
+.radio {
+  margin-right: 20rpx;
+}

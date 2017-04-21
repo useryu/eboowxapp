@@ -1,0 +1,28 @@
+<import src="../common/head.wxml" />
+<import src="../common/foot.wxml" />
+
+<view class="container">
+  <view class="page-body">
+
+  <view class="page-section kind-list">
+    <view class="weui-cells weui-cells_after-title kind-list-item" wx:for="{{testList}}" wx:key="id">
+      <view class="kind-list-text">
+        {{item.id}}、{{item.title}}
+      </view>
+      <radio-group id="{{item.id}}" bindchange="radioChange">
+          <label class="weui-cell weui-check__label" wx:for="{{item.options}}" wx:for-item="option" wx:key="id">
+
+            <view class="weui-cell__hd">
+              <radio value="{{option.id}}" />
+            </view>
+            <view class="weui-cell__bd">{{option.text}}</view>
+          </label>
+      </radio-group>
+    </view>
+  </view>
+  <view class="input-panel">
+    <button bindtap="submitAnswer" class="send-btn">提交答案</button>
+  </view>
+
+  </view>
+</view>
