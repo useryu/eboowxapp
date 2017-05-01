@@ -1,4 +1,22 @@
-// pages/audio/list.js
+var app = getApp()
+/**
+ * @fileOverview 演示会话服务和 WebSocket 信道服务的使用方式
+ */
+
+// 引入 QCloud 小程序增强 SDK
+var qcloud = require('../../vendor/qcloud-weapp-client-sdk/index');
+
+// 引入配置
+var config = require('../../config');
+var showModel = (title, content) => {
+    wx.hideToast();
+
+    wx.showModal({
+        title,
+        content: JSON.stringify(content),
+        showCancel: false
+    });
+};
 Page({
   data: {
     current: null,
@@ -8,37 +26,61 @@ Page({
     list:[]
   },
   onLoad:function(options){
-    this.setData({
-      list:[
-        {
-      id:1,
-      poster: 'http://y.gtimg.cn/music/photo_new/T002R300x300M000003rsKF44GyaSk.jpg?max_age=2592000',
-      name: '此时此刻此时此刻此时此刻此时此刻此时此刻此时此刻此时此刻此时此刻此时此刻此时此刻此时此刻',
-      author: '许巍1',
-      src: 'http://ws.stream.qqmusic.qq.com/M500001VfvsJ21xFqb.mp3?guid=ffffffff82def4af4b12b3cd9337d5e7&uin=346897220&vkey=6292F51E1E384E06DCBDC9AB7C49FD713D632D313AC4858BACB8DDD29067D3C601481D36E62053BF8DFEAF74C0A5CCFADD6471160CAF3E6A&fromtag=46',
-    },
-    {
-      id:2,
-      poster: 'http://y.gtimg.cn/music/photo_new/T002R300x300M000003rsKF44GyaSk.jpg?max_age=2592000',
-      name: '此时此刻此时此刻此时此刻此时此刻此时此刻此时此刻此时此刻此时此刻此时此刻此时此刻此时此刻',
-      author: '许巍2',
-      src: 'http://ws.stream.qqmusic.qq.com/M500001VfvsJ21xFqb.mp3?guid=ffffffff82def4af4b12b3cd9337d5e7&uin=346897220&vkey=6292F51E1E384E06DCBDC9AB7C49FD713D632D313AC4858BACB8DDD29067D3C601481D36E62053BF8DFEAF74C0A5CCFADD6471160CAF3E6A&fromtag=46',
-    },
-    {
-      id:3,
-      poster: 'http://y.gtimg.cn/music/photo_new/T002R300x300M000003rsKF44GyaSk.jpg?max_age=2592000',
-      name: '此时此刻此时此刻此时此刻此时此刻此时此刻此时此刻此时此刻此时此刻此时此刻此时此刻此时此刻',
-      author: '许巍3',
-      src: 'http://ws.stream.qqmusic.qq.com/M500001VfvsJ21xFqb.mp3?guid=ffffffff82def4af4b12b3cd9337d5e7&uin=346897220&vkey=6292F51E1E384E06DCBDC9AB7C49FD713D632D313AC4858BACB8DDD29067D3C601481D36E62053BF8DFEAF74C0A5CCFADD6471160CAF3E6A&fromtag=46',
-    },
-    {
-      id:4,
-      poster: 'http://y.gtimg.cn/music/photo_new/T002R300x300M000003rsKF44GyaSk.jpg?max_age=2592000',
-      name: '此时此刻此时此刻此时此刻此时此刻此时此刻此时此刻此时此刻此时此刻此时此刻此时此刻此时此刻',
-      author: '许巍4',
-      src: 'http://ws.stream.qqmusic.qq.com/M500001VfvsJ21xFqb.mp3?guid=ffffffff82def4af4b12b3cd9337d5e7&uin=346897220&vkey=6292F51E1E384E06DCBDC9AB7C49FD713D632D313AC4858BACB8DDD29067D3C601481D36E62053BF8DFEAF74C0A5CCFADD6471160CAF3E6A&fromtag=46',
+    var that=this;
+    qcloud.request({
+        // 要请求的地址
+        url: config.service.audioListUrl,
+        data: {
+          bookId:app.globalData.userObj.data.data.user.readingBookId  
+        },
+        success(result) {
+          that.setData({
+            list:result.data.list
+          });
+        },
+
+        fail(error) {
+            showModel('请求失败', error);
+            console.log('request fail', error);
+        },
+
+        complete() {
+            console.log('request complete');
+        }
+    });
+
+  },
+  onplay:function(e){
+    var id = e.target.id;
+    if(this.current){
+      this.current.pause();
     }
-      ]
+    this.current = wx.createAudioContext(id);
+    this.current.play();
+  },
+  onend:function(e){
+    var id = e.target.id;
+    qcloud.request({
+        // 要请求的地址
+        url: config.service.playEndUrl,
+        data: {
+          id: id
+        },
+        // 请求之前是否登陆，如果该项指定为 true，会在请求之前进行登录
+        login: true,
+
+        success(result) {
+            showModel("音频已听完")
+        },
+
+        fail(error) {
+            showModel('请求失败', error);
+            console.log('request fail', error);
+        },
+
+        complete() {
+            console.log('request complete');
+        }
     });
   },
   onReady:function(){

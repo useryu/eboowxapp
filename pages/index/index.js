@@ -45,15 +45,57 @@ Page({
         userObj:null
     },
 
-  onLoad: function() {
-    var that = this
-    app.getUserObj(function(userObj) {
-            //更新数据
-            that.setData({
-                userObj: userObj
-            })
-    })
-  }, 
+    onLoad: function() {
+        var that = this
+        app.getUserObj(function(userObj) {
+                //更新数据
+                that.setData({
+                    userObj: userObj
+                })
+        })
+    }, 
+    scanBook(){
+        var that = this
+        wx.scanCode({
+          success: function(res){
+            qcloud.request({
+                // 要请求的地址
+                url: config.service.switchToBook,
+
+                // 请求之前是否登陆，如果该项指定为 true，会在请求之前进行登录
+                login: true,
+
+                data:{
+                    bookNo:res.result
+                },
+
+                success(result) {
+                    console.log('request success', result);
+                    that.setData({
+                        userObj: result
+                    });
+                    app.globalData.userObj = result;
+                },
+
+                fail(error) {
+                    showModel('请求失败', error);
+                    console.log('request fail', error);
+                },
+
+                complete() {
+                    console.log('request complete');
+                }
+            });
+            showSuccess("您进入书本的学习");
+          },
+          fail: function(res) {
+            showModel("扫码失败", "请通知管理人员书本上二维码损坏");
+          },
+          complete: function(res) {
+            // complete
+          }
+        })
+    },
     toAudioListPage() {
         wx.navigateTo({ url: '../audio/list' });
     },

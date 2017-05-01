@@ -35,29 +35,32 @@ var showModel = (title, content) => {
 
 Page( {
   data: {
-    testList: [{
-      id:1,
-      title: 'test1',
-      answer: 1,
-      options: [{id:1,text:'select a'},{id:2,text:'select a'},{id:3,text:'select a'},{id:4,text:'select a'}]
-    },{
-      id:2,
-      title: 'test2',
-      answer: 1,
-      options: [{id:1,text:'select a'},{id:2,text:'select a'},{id:3,text:'select a'},{id:4,text:'select a'}]
-    },{
-      id:3,
-      title: 'test3',
-      answer: 1,
-      options: [{id:1,text:'select a'},{id:2,text:'select a'},{id:3,text:'select a'},{id:4,text:'select a'}]
-    }
-	],
+    testList: [],
   mypointer:-1,
   myanswers:[]
   },
 
   onLoad: function() {
     var that = this
+
+    qcloud.request({
+        // 要请求的地址
+        url: config.service.getLevelQuizUrl,
+        success(result) {
+          that.setData({
+            testList:result.data
+          });
+        },
+
+        fail(error) {
+            showModel('请求失败', error);
+            console.log('request fail', error);
+        },
+
+        complete() {
+            console.log('request complete');
+        }
+    });
   },
   radioChange: function(e) {
     var newArr = this.data.myanswers

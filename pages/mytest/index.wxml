@@ -7,7 +7,7 @@
   <view class="page-section kind-list">
     <view class="weui-cells weui-cells_after-title kind-list-item" wx:for="{{testList}}" wx:key="id">
       <view class="kind-list-text">
-        {{item.id}}、{{item.title}}
+        {{item.no}}、{{item.title}}
       </view>
       <radio-group id="{{item.id}}" bindchange="radioChange">
           <label class="weui-cell weui-check__label" wx:for="{{item.options}}" wx:for-item="option" wx:key="id">

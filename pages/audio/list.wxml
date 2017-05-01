@@ -6,8 +6,9 @@
 
   <view class="page-body">
     <view class="page-section page-section-gap"  bindtap="play" style="text-align: center;" wx:for="{{list}}" wx:key="id">
-      <audio style="text-align: left" src="{{item.src}}" poster="{{item.poster}}" 
-      name="{{item.name}}" author="{{item.author}}" action="{{audioAction}}" controls></audio>
+      <audio style="text-align: left" src="{{item.url}}" 
+      bindplay="onplay" bindended="onend" id="{{item.id}}" 
+      name="{{item.chaptername}}" author="{{item.bookname}}" action="{{audioAction}}" controls></audio>
     </view>
   </view>
 
