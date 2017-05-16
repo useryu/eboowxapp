@@ -89,7 +89,7 @@ Page({
             showSuccess("您进入书本的学习");
           },
           fail: function(res) {
-            showModel("扫码失败", "请通知管理人员书本上二维码损坏");
+            showModel("扫码失败", "如果是书本上二维码不清晰，请通知管理人员书本上二维码损坏");
           },
           complete: function(res) {
             // complete

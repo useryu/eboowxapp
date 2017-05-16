@@ -1,1 +1,3 @@
-/* pages/myabout/index.wxss */
+.container {
+  background-color: #F2f2f2;
+}

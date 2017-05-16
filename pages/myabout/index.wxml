@@ -1,2 +1,4 @@
 <!--pages/myabout/index.wxml-->
-<text>pages/myabout/index.wxml</text>
+<view class="container">
+<text>最高效的培训，做互联网上最懂第二语言习得的公共帐号。传播科学的第二语言习得理论；优秀学习资料推荐并定期提供公益外语培训。</text>
+</view>

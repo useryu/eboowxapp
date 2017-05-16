@@ -6,15 +6,16 @@
         </view>
     </view>
     <view class="line">
-        <text>学习有困难？欢迎使用</text>
-        <view class="line-control">
-            <view bindtap="toAssistListPage" class="item"><view class="item-inner">学习助手</view></view>
-        </view>
-    </view>
-    <view class="line">
         <text>多听，才能听说读写样样精通</text>
         <view class="line-control">
             <view bindtap="toAudioListPage" class="item" ><view class="item-inner">听音频</view></view>
+        </view>
+    </view>
+    <!--
+    <view class="line">
+        <text>学习有困难？欢迎使用</text>
+        <view class="line-control">
+            <view bindtap="toAssistListPage" class="item"><view class="item-inner">学习助手</view></view>
         </view>
     </view>
     <view class="line">
@@ -23,4 +24,5 @@
             <view bindtap="toQuizListPage" class="item" ><view class="item-inner">单元测试</view></view>
         </view>
     </view>
+    -->
 </view>

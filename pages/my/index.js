@@ -40,15 +40,21 @@ Page( {
       icon: '../../images/iconfont-dingdan.png',
       text: '我的测试',
       myPageName: 'mytest'
-    }, {
+    }, 
+    /*
+    {
         icon: '../../images/iconfont-shouhuodizhi.png',
         text: '会员管理',
       myPageName: 'mymember'
-      }, {
+      }, 
+      
+      {
         icon: '../../images/iconfont-kefu.png',
         text: '联系客服',
       myPageName: 'mycustomer'
-      }, {
+      }, 
+      */
+      {
         icon: '../../images/iconfont-help.png',
         text: '关于易步',
       myPageName: 'myabout'

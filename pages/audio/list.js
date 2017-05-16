@@ -64,7 +64,8 @@ Page({
         // 要请求的地址
         url: config.service.playEndUrl,
         data: {
-          id: id
+          id: id,
+          bookId: app.globalData.userObj.data.data.user.readingBookId
         },
         // 请求之前是否登陆，如果该项指定为 true，会在请求之前进行登录
         login: true,

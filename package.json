@@ -1,13 +1,13 @@
 {
-  "name": "qcloud-weapp-client-demo",
+  "name": "eboo-weapp-client",
   "version": "1.0.0",
-  "description": "腾讯云微信小程序客户端 DEMO",
+  "description": "易步英语学习工具",
   "main": "app.js",
   "repository": {
     "type": "git",
-    "url": "https://github.com/tencentyun/weapp-client-demo.git"
+    "url": "no"
   },
-  "keywords": [],
-  "author": "CFETeam",
+  "keywords": ["英语","英语阅读","英语学习"],
+  "author": "Fisher.Yu",
   "license": "MIT"
 }

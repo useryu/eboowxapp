@@ -1,19 +1,18 @@
 {
-  "name": "qcloud-weapp-client-demo",
-  "description": "QCloud Wechat App Demo",
+  "name": "eboo-weapp-client",
+  "description": "易步英语学习工具",
   "main": "app.js",
   "authors": [
     "Tencent Clound"
   ],
   "license": "MIT",
   "keywords": [
-    "qcloud",
-    "wechat",
-    "weapp",
-    "demo",
-    "sdk"
+    "英语",
+    "英语阅读",
+    "英语学习",
+    "英语培训"
   ],
-  "homepage": "",
+  "homepage": "www.ebooboo.cn",
   "ignore": [
     "**/.*",
     "node_modules",
