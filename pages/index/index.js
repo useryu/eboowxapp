@@ -103,7 +103,7 @@ Page({
         wx.navigateTo({ url: '../assist/list' });
     },
     toQuizListPage() {
-        wx.navigateTo({ url: '../quiz/list' });
+        wx.navigateTo({ url: '../quiz/index' });
     },
 
     /**

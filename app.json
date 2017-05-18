@@ -9,7 +9,7 @@
         "pages/myabout/index",
         "pages/audio/list",
         "pages/assist/list",
-        "pages/quiz/list"
+        "pages/quiz/index"
     ],
     "window": {
         "backgroundTextStyle": "light",

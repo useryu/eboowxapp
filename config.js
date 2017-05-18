@@ -25,6 +25,8 @@ var config = {
 
         getBookQuiz:    `https://${host}/quiz/getBookQuiz`,
 
+        submitBookQuizPoint: `https://${host}/quiz/submitBookQuizPoint`,
+
         switchToBook:    `https://${host}/user/switchToBook`,
 
         // 测试的信道服务地址

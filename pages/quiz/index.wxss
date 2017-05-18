@@ -1,0 +1,8 @@
+@import "../common/lib/weui.wxss";
+@import "../common/index.wxss";
+.kind-list-text{
+  margin-right: 20rpx;
+}
+.radio {
+  margin-right: 20rpx;
+}
