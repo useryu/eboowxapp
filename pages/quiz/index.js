@@ -47,7 +47,7 @@ Page( {
         // 要请求的地址
       url: config.service.getBookQuiz,
       data: {
-        bookId: app.globalData.userObj.data.data.user.readingBookId
+        bookId: app.globalData.userObj.data.data.user.reading_book_id
       },
         success(result) {
           that.setData({
@@ -106,22 +106,56 @@ Page( {
       // 要请求的地址
       url: config.service.submitBookQuizPoint,
       data: {
-        bookId: app.globalData.userObj.data.data.user.readingBookId,
+        bookId: app.globalData.userObj.data.data.user.reading_book_id,
         point: pointer,
         total: self.data.testList.length
       },
       success(result) {
+        var isPassed = result.data.passed;
+        if (isPassed == 1) {
+          wx.showModal({
+            title: '您之前已经通过本章节的测试',
+            content: JSON.stringify('不需要再次测试'),
+            showCancel: false,
+            success: function (res) {
+              wx.reLaunch({ url: '/pages/index/index' });
+            }
+          });
+          return;
+        }
         var isDone = result.data.quiz_is_done;
         if(isDone==1){
           var isPass = result.data.ifUpgradeToNextLevel;
           if(isPass==1){
-            showModel('恭喜升级了', '您可以进入下一个级别的学习了');
-          }else{
-            showModel('恭喜通过本书测试', '您还需要再积累本级别的有效时长来升级');
+            wx.showModal({
+              title:'恭喜升级了',
+              content: JSON.stringify('您可以进入下一个级别的学习了'),
+              showCancel: false,
+              success: function (res) {
+                wx.reLaunch({ url: '/pages/index/index' });
+              }
+            });
+          } else {
+            wx.showModal({
+              title: '恭喜通过本书测试',
+              content: JSON.stringify('您还需要再积累本级别的有效时长来升级'),
+              showCancel: false,
+              success: function (res) {
+                wx.reLaunch({ url: '/pages/index/index' });
+              }
+            });
           }
         } else {
-          showModel('本次测试未通过','先去学习一下，再来测试吧，建议多听多读');
+          wx.showModal({
+            title: '本次测试未通过',
+            content: JSON.stringify('先去学习一下，再来测试吧，建议多听多读'),
+            showCancel: false,
+            success: function (res) {
+              wx.reLaunch({ url: '/pages/index/index' });
+            }
+          });
         }
+        
       },
 
       fail(error) {
@@ -132,10 +166,6 @@ Page( {
       complete() {
         console.log('request complete');
       }
-    });
-    wx.showToast({
-        title: '你答对了'+pointer+'题',
-        icon: 'success'
     });
   }
 })

@@ -36,12 +36,14 @@ var showModel = (title, content) => {
 Page( {
   data: {
     userInfo: {},
-    userListInfo: [ {
+    user: {},
+    pageList: [
+    /*
+      {
       icon: '../../images/iconfont-dingdan.png',
       text: '我的测试',
       myPageName: 'mytest'
     }, 
-    /*
     {
         icon: '../../images/iconfont-shouhuodizhi.png',
         text: '会员管理',
@@ -56,7 +58,7 @@ Page( {
       */
       {
         icon: '../../images/iconfont-help.png',
-        text: '关于易步',
+        text: '有效时对应能力说明',
       myPageName: 'myabout'
       }]
   },
@@ -66,7 +68,8 @@ Page( {
     app.getUserObj(function(userObj) {
             //更新数据
             that.setData({
-                userInfo: userObj.data.data.userInfo
+                userInfo: userObj.data.data.userInfo,
+                user: userObj.data.data.user
             })
     })
   }

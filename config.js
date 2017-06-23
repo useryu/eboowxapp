@@ -23,9 +23,13 @@ var config = {
 
         getLevelQuizUrl:   `https://${host}/quiz/getLevelQuiz`,
 
+        getChildLevelQuiz: `https://${host}/quiz/getChildLevelQuiz`,
+
         getBookQuiz:    `https://${host}/quiz/getBookQuiz`,
 
         submitBookQuizPoint: `https://${host}/quiz/submitBookQuizPoint`,
+
+        submitLevelPoint: `https://${host}/quiz/submitLevelPoint`,
 
         switchToBook:    `https://${host}/user/switchToBook`,
 

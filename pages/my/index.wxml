@@ -5,7 +5,27 @@
     <text class="userinfo-nickname">{{userInfo.nickName}}</text>
   </view>
   <view class="info_list">
-    <block wx:for="{{userListInfo}}">
+      <view class="weui_cell">
+          <view class="weui_cell_bd">当前级别</view>
+          <view class="weui_cell_bd">
+              <view class="weui_cell_bd_p"> {{user.level}}级 </view>
+          </view>
+      </view>
+      <view class="weui_cell">
+          <view class="weui_cell_bd">你的总有效时</view>
+          <view class="weui_cell_bd">
+              <view class="weui_cell_bd_p"> {{user.effectHour}}</view>
+          </view>
+      </view>
+      <view class="weui_cell">
+          <view class="weui_cell_bd">到下一级还差</view>
+          <view class="weui_cell_bd">
+              <view class="weui_cell_bd_p"> {{user.toNextLevelHour}}              </view>
+          </view>
+      </view>
+  </view>
+  <view class="info_list">
+    <block wx:for="{{pageList}}">
         <navigator url="../{{item.myPageName}}/index">
         <view class="weui_cell">
             <view class="weui_cell_hd"><image src="{{item.icon}}"></image></view>

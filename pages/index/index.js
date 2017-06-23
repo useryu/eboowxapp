@@ -45,13 +45,24 @@ Page({
         userObj:null
     },
 
+    onShow: function () {
+      console.log('index Show')
+      app.getUserObj(function (userObj) {
+        if (userObj.data.data.user.point == -1) {
+          var t='adult';
+          wx.redirectTo({ url: '/pages/mytest/index?t='+t });
+        }
+      })
+    },
     onLoad: function() {
         var that = this
-        app.getUserObj(function(userObj) {
-                //更新数据
-                that.setData({
-                    userObj: userObj
-                })
+        app.getUserObj(function (userObj) {
+          that.setData({
+            userObj: userObj
+          })
+          if (userObj.data.data.user.point == -1) {
+            wx.redirectTo({ url: '/pages/mytest/index' });
+          }
         })
     }, 
     scanBook(){
@@ -97,13 +108,25 @@ Page({
         })
     },
     toAudioListPage() {
+      if (this.data.userObj.data.data.user.readingBookId == 0) {
+        showModel("请先扫书上二维码", "选择您正在阅读的书，扫描后面贴的二维码后进入相关音频页面");
+      }else{
         wx.navigateTo({ url: '../audio/list' });
+      }
     },
     toAssistListPage() {
+      if (this.data.userObj.data.data.user.readingBookId == 0) {
+        showModel("请先扫书上二维码", "选择您正在阅读的书，扫描后面贴的二维码后进入相关阅读助手页面");
+      } else {
         wx.navigateTo({ url: '../assist/list' });
+      }
     },
     toQuizListPage() {
+      if (this.data.userObj.data.data.user.readingBookId == 0) {
+        showModel("请先扫书上二维码", "选择您正在阅读的书，扫描后面贴的二维码后进入相关测试页面");
+      } else {
         wx.navigateTo({ url: '../quiz/index' });
+      }
     },
 
     /**

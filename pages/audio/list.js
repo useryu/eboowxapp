@@ -31,7 +31,7 @@ Page({
         // 要请求的地址
         url: config.service.audioListUrl,
         data: {
-          bookId:app.globalData.userObj.data.data.user.readingBookId  
+          bookId: app.globalData.userObj.data.data.user.reading_book_id  
         },
         success(result) {
           that.setData({
@@ -51,12 +51,6 @@ Page({
 
   },
   onplay:function(e){
-    var id = e.target.id;
-    if(this.current){
-      this.current.pause();
-    }
-    this.current = wx.createAudioContext(id);
-    this.current.play();
   },
   onend:function(e){
     var id = e.target.id;
@@ -65,7 +59,7 @@ Page({
         url: config.service.playEndUrl,
         data: {
           id: id,
-          bookId: app.globalData.userObj.data.data.user.readingBookId
+          bookId: app.globalData.userObj.data.data.user.reading_book_id
         },
         // 请求之前是否登陆，如果该项指定为 true，会在请求之前进行登录
         login: true,
@@ -96,7 +90,11 @@ Page({
   onUnload:function(){
     // 页面关闭
   },
-  play:function(e){
-    var id=e.target.id
+  play: function (e) {
+    var id = e.target.id;
+    if (this.current) {
+      //this.current.pause();
+    }
+    this.current = wx.createAudioContext(id);
   }
 })

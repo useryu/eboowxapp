@@ -51,6 +51,11 @@ App({
   },
   onShow: function () {
     console.log('App Show')
+    this.getUserObj(function (userObj) {
+      if (userObj.data.data.user.point==-1){
+        wx.redirectTo({ url: '/pages/mytest/index' });
+      }
+    })
   },
   onHide: function () {
     console.log('App Hide')

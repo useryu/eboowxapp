@@ -1,4 +1,20 @@
 <!--pages/myabout/index.wxml-->
-<view class="container">
-<text>最高效的培训，做互联网上最懂第二语言习得的公共帐号。传播科学的第二语言习得理论；优秀学习资料推荐并定期提供公益外语培训。</text>
+<view class="article">
+			<view class="h3">有效时对应能力说明</view>
+      <view class="table">
+        <view class="tr bg-w">
+          <view class="th">有效时</view>
+          <view class="th">能力</view>
+        </view>
+        <block wx:for="{{listData}}" wx:key="{{code}}">
+          <view class="tr bg-g" wx:if="{{index % 2 == 0}}">
+            <view class="td">{{item.code}}</view>
+            <view class="td">{{item.text}}</view>
+          </view>
+          <view class="tr" wx:else>
+            <view class="td">{{item.code}}</view>
+            <view class="td">{{item.text}}</view>
+          </view>
+        </block>
+      </view>
 </view>

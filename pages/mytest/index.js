@@ -37,15 +37,23 @@ Page( {
   data: {
     testList: [],
   mypointer:-1,
-  myanswers:[]
+  myanswers:[],
+  adult:1
   },
 
-  onLoad: function() {
+  onLoad: function(options) {
     var that = this
-
+    var t = options.t
+    var quizUrl = config.service.getLevelQuizUrl
+    if (t && 'child'==t){
+      quizUrl = config.service.getChildLevelQuiz;
+      that.setData({
+        adult:0
+      })
+    }
     qcloud.request({
         // 要请求的地址
-        url: config.service.getLevelQuizUrl,
+        url: quizUrl,
         success(result) {
           that.setData({
             testList:result.data
@@ -80,6 +88,7 @@ Page( {
     });
   },
   submitAnswer: function() {
+    var that=this;
     var pointer=0;
     var newArr = this.data.myanswers
     for(var i in newArr){
@@ -98,9 +107,32 @@ Page( {
     this.setData({
       mypointer:pointer
     })
-    wx.showToast({
-        title: '你得了'+pointer+'分',
-        icon: 'success'
+    qcloud.request({
+      // 要请求的地址
+      url: config.service.submitLevelPoint,
+      data: {
+        point: pointer,
+        adult: that.data.adult
+      },
+      success(user) {
+        app.globalData.userObj.data.data.user.point=pointer;
+        wx.showToast({
+          title: '你答对了' + pointer + '题',
+          icon: 'success'
+        });
+        if(pointer>0){
+          wx.reLaunch({ url: '/pages/index/index' });
+        }
+      },
+
+      fail(error) {
+        showModel('请求失败', error);
+        console.log('request fail', error);
+      },
+
+      complete() {
+        console.log('request complete');
+      }
     });
   }
 })
